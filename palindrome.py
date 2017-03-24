@@ -65,7 +65,7 @@ def main():
     print ( "11: " + str ( solution.isPalindrome(11) ) )
     print ( "121: " + str ( solution.isPalindrome(121) ) )
     print ( "12321: " + str ( solution.isPalindrome(12321) ) )
-    print ( "-2147447412: " + str ( solution.isPalindrome(-21474 47412) ) )
+    print ( "-2147447412: " + str ( solution.isPalindrome(-2147447412) ) )
 
 if __name__ == "__main__":
     main()
