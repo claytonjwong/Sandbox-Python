@@ -40,7 +40,7 @@ class Solution(object):
         while ( decimal_divisor >= 10 ):
             
             #
-            # check to see if the left-most digit does NOT exist the right-most digit
+            # check to see if the left-most digit does NOT equal the right-most digit
             # if so, then return False
             #
             if ( int ( x / decimal_divisor ) != x % 10 ):
