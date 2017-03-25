@@ -16,8 +16,6 @@ class Solution(object):
         #
         if ( strs == None ):
             return None
-
-
         
         #
         # find the smallest string in the array of strings
