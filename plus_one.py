@@ -40,8 +40,17 @@ class Solution(object):
             #
             if ( digits[i] == 10 ):
                 
+                #
+                # insert a 0 as a placehold since carry over occurs
+                #
                 digits_plus_one.insert(0, 0)
                 
+                #
+                # since carry over occurred, we need to increment
+                # the next most significant digit, see if we are already
+                # at the most significant digit,
+                # if so, insert 1 in that newly created position
+                #
                 if ( i == 0 ):
                     #
                     # left-most digit, append 1 onto new position
@@ -53,7 +62,10 @@ class Solution(object):
                     # increment next digit if not the left-most digit
                     #
                     digits[i-1] += 1
-                    
+            
+            #
+            # carry over did NOT occur, simply insert the value
+            #        
             else:
                 digits_plus_one.insert(0, digits[i])    
             
