@@ -18,7 +18,7 @@ Note:
 
 """
 
-import pdb
+ 
 
 
 
@@ -60,13 +60,12 @@ class Solution(object):
         #
         # example with coins [1,2,5]
         #
-        # change_coin_count [ 8 ] = 3  (5,2,1)
-        # change_coin_count [ 10 ] = 2  (5,5)
+        # change_coin_count [ 8 ] = 3  ( 3 coins used: 5,2,1)
+        # change_coin_count [ 10 ] = 2  ( 2 coins used: 5,5)
         #
-        # initialize all to MAX_INT
+        # initialize all to -1
         #
         change_coin_count = {}
-        MAX_INT = pow(2,31)
         
         #
         # i is the current amount of change,
@@ -75,9 +74,9 @@ class Solution(object):
         for i in range(1, amount+1):
             
             #
-            # initialize to a large artibtrary value to assume there is no coin solution for this i amount
+            # initialize to -1 to assume there is no coin solution for this i amount
             #
-            change_coin_count[i] = MAX_INT
+            change_coin_count[i] = -1
             
             #
             # go through each coin in reverse order
@@ -106,25 +105,18 @@ class Solution(object):
                     #
                     # + 1 ( this coin )
                     #
-                    change_coin_count[i] = min ( change_coin_count[i], 1 + change_coin_count[ i - coin ] )
+                    change_coin_count[i] = 1 + change_coin_count[ i - coin ]
+                    break
                     
         
-        if ( change_coin_count [ amount ] == MAX_INT ):
-            return -1
-        else:
-            return change_coin_count [ amount ]
+        return change_coin_count [ amount ]
                 
         
 def main():
+
     solution = Solution()
+    print ( "20 == " + str ( solution.coinChange([419, 408, 186, 83], 6249) ) )
     
-
-    
-    print ( "?? == " + str ( solution.coinChange([419, 408, 186, 83], 6249) ) )
-    
-
-    
-     
     
 if __name__ == "__main__":
     main()
