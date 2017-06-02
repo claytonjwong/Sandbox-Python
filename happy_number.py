@@ -68,7 +68,7 @@ class Solution(object):
         while ( n > 0 ):
             
             #
-            # left-most decimal position value
+            # right-most decimal position value
             #
             dec_pos_val = n % 10
             
@@ -78,7 +78,7 @@ class Solution(object):
             sum_of_each_dec_pos_val_squared += ( dec_pos_val * dec_pos_val )
             
             #
-            # remove left-most decimal position
+            # remove right-most decimal position
             #
             n = int ( n / 10 )
             
