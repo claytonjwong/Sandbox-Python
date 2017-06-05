@@ -77,9 +77,9 @@ class Solution(object):
                 #
                 # i^2 + 1*2 = 6 ... so 6 is NOT prime
                 #
-                # i^2 + 4 = 8 ... so 8 is NOT prime
+                # i^2 + 2*2 = 8 ... so 8 is NOT prime
                 #
-                # i^2 + 6 = 10 ... so 10 is NOT prime
+                # i^2 + 3*2 = 10 ... so 10 is NOT prime
                 #
                  
                 #
@@ -99,10 +99,7 @@ class Solution(object):
         for prime in pp:
             if prime:
                 count += 1    
-         
-        import pdb
-        pdb.set_trace()
-         
+
         return count
 
 
