@@ -58,7 +58,7 @@ class NumArray(object):
                 #
                 # the current sum = the current num + the previous sum
                 #
-                self.sums[i] = ( self.nums[i] + self.sums[i-1])
+                self.sums[i] = ( self.nums[i] + self.sums[i-1] )
             
             i += 1
             
