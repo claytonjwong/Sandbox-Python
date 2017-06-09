@@ -1,8 +1,31 @@
 """
 
+345. Reverse Vowels of a String
+
+Write a function that takes a string as input and reverse only the vowels of a string.
+
+Example 1:
+Given s = "hello", return "holle".
+
+Example 2:
+Given s = "leetcode", return "leotcede".
+
+Note:
+The vowels does not include the letter "y".
+
+
 """
 
+import re
+
 class Solution(object):
+        
+    def __init__(self):
+        #
+        # this list is used to keep track of all vowels in a string to be reversed
+        #
+        self.vowels = []
+    
     def reverseVowels(self, str):
         """
         :type s: str
@@ -10,52 +33,33 @@ class Solution(object):
         """
         
         #
-        # in python, strings are immutable, so ns is the new string
-        # which will be contructed and returned
+        # all vowels, only lowercase is needed, since our regex will use the flag to IGNORECASE
         #
-        ns = ""
-        
-        queue = []
-        
-        vset = set("aeiouAEIOU")
+        vset = "[aeiou]"
         
         #
-        # iterate through str and add vowels onto queue
+        # find all vowels in the string
         #
-        for ch in str:
-            
-            if ch in vset:
-                
-                queue.append(ch)
-                
-        #
-        # iterate through s and construct ns
-        # pop off the q whenever there is vowel found
-        # in order to reverse the order of vowels
-        # non-vowels are simply appended to this string
-        #
-        for ch in str:
-            
-            #
-            # vowel
-            #
-            if ch in vset:
-                
-                ns += queue.pop()
-            
-            #
-            # non-vowel
-            #
-            else:
-                
-                ns += ch
+        self.vowels = re.findall(vset, str, flags=re.IGNORECASE)
         
+        #
+        # replace vowels in reverse order, the re.sub function will invoke self.replaceVowel()
+        # whenever a vowel is found, and self.replaceVowel() pops off the vowels previously found
+        # in reverse order
+        #
+        return re.sub(vset, self.replaceVowel, str, flags=re.IGNORECASE)
         
-        return ns
-    
+
+    def replaceVowel(self, matchobj):
+        """
+        :type matchobj: re matchobj
+        """
+
+        return self.vowels.pop()
+
 
 def main():
-    
+
     
     solution = Solution()
     print ( "holle == " + str ( solution.reverseVowels("hello") ))
