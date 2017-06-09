@@ -76,7 +76,22 @@ class Solution(object):
         
         
         return [x, y]
+    
 
+    def swap2(self, x, y, n):
+        """
+        :type x,y,n: int
+        :rtype: List[int]
+        """
+        
+        bin_x = "{:032b}".format(x)
+        bin_y = "{:032b}".format(y)
+        
+        x = int ( bin_x[:-n] + bin_y[-n:], 2 )
+        y = int ( bin_y[:-n] + bin_x[-n:], 2 )
+        
+        return [x,y]
+    
 #
 # test cases
 #
@@ -96,6 +111,14 @@ def unit_test(solution):
     print ("swap last 2 bits...")
     print ("x = 7 = 0111 ==> 0100 = 4: " + str(new_x) )
     print ("y = 8 = 1000 ==> 1011 = 11: " + str(new_y) )
+    print ("\n")
+    
+    
+    new_x, new_y = solution.swap2(x,y,2)
+    
+    print ("swap last 2 bits...")
+    print ("x = 7 = 0111 ==> 0100 = 4: " + str(new_x) )
+    print ("y = 8 = 1000 ==> 1011 = 11: " + str(new_y) )
     print ("\n\n\n")
     
     #
@@ -109,8 +132,17 @@ def unit_test(solution):
     print ("swap last 3 bits...")
     print ("x = 7 = 0111 ==> 0000 = 0: " + str(new_x) )
     print ("y = 8 = 1000 ==> 1111 = 15 : " + str(new_y) )
+    print ("\n")
+
+
+    new_x, new_y = solution.swap2(x,y,3)
+    
+    print ("swap last 3 bits...")
+    print ("x = 7 = 0111 ==> 0000 = 0: " + str(new_x) )
+    print ("y = 8 = 1000 ==> 1111 = 15 : " + str(new_y) )
     print ("\n\n\n")
     
+
     #
     # swap all 4 bits
     #
@@ -118,6 +150,13 @@ def unit_test(solution):
     # y = 8 = 1000 ==> 0111 = 7 
     #
     new_x, new_y = solution.swap(x,y,4)
+    
+    print ("swap last 4 bits...")
+    print ("x = 7 = 0111 ==> 1000 = 8: " + str(new_x) )
+    print ("y = 8 = 1000 ==> 0111 = 7: " + str(new_y) )
+    print ("\n")
+    
+    new_x, new_y = solution.swap2(x,y,4)
     
     print ("swap last 4 bits...")
     print ("x = 7 = 0111 ==> 1000 = 8: " + str(new_x) )
@@ -130,6 +169,14 @@ def unit_test(solution):
     x = 15
     y = 15
     new_x, new_y = solution.swap(x,y,1)
+    print ("swap equal numbers...")
+    print ("x = 15: " + str(new_x) )
+    print ("y = 15: " + str(new_y) )
+    print ("\n")
+    
+    x = 15
+    y = 15
+    new_x, new_y = solution.swap2(x,y,1)
     print ("swap equal numbers...")
     print ("x = 15: " + str(new_x) )
     print ("y = 15: " + str(new_y) )
