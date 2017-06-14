@@ -11,7 +11,6 @@ For example, if there are 4 stones in the heap, then you will never win the game
 
 """
 
-
 class Solution(object):
     def canWinNim(self, n):
         """
