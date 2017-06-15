@@ -36,85 +36,91 @@ The substring with start index = 2 is "ab", which is an anagram of "ab".
 
 """
 
+
 class Solution(object):
+    
     def findAnagrams(self, str_to_check, chars_to_mix_up):
         """
         :type str_to_check: str
         :type chars_to_mix_up: str
-        :rtype: List[int]
+        :rtype: List[int]    
         """
         anagram_index_list = []
         
+        #
+        # if input is invalid, then return an empty list
+        #
         if str_to_check is None or chars_to_mix_up is None:
             return []
         
         len_str_to_check = len ( str_to_check )
         len_chars_to_mix_up = len ( chars_to_mix_up )
         
+        #
+        # no anagram is possible if the amount of potential characters
+        # used in the string to check is less than the anagram itself
+        #
         if len_str_to_check < len_chars_to_mix_up:
             return []
         
-        i = 0
-        while i <= len_str_to_check - len_chars_to_mix_up:
+        #
+        # hash to store count of chars up to ord('z') = 122
+        #
+        hash_str_to_check = [0] * 123
+        hash_chars_to_mix_up = [0] * 123
+        
+        #
+        # fill up hash which a potential anagram would need to match
+        #
+        for ch in chars_to_mix_up:
+            hash_chars_to_mix_up[ord(ch)] += 1
+            
+        #
+        # fill up hash for the string to check from 0 to len ( chars to mix up - 2 ) inclusive
+        #
+        for ch in str_to_check[:len_chars_to_mix_up - 1 ]:
+            hash_str_to_check[ord(ch)] += 1
+        
+        #
+        # iterate through the string to check for anagarams, start at len ( chars to mix up - 1 )
+        #
+        for i in range ( len_chars_to_mix_up - 1, len_str_to_check ):
+
+            #
+            # add curr
+            #
+            curr = str_to_check[i]
+
+            hash_str_to_check [ ord(curr) ] += 1
             
             #
-            # slide from right to left and check for anagrams
+            # remove prev
             #
-            curr_substr = str_to_check[i:i+len_chars_to_mix_up]
-            
-            if self.isAnagram( curr_substr, chars_to_mix_up ):
-                anagram_index_list.append(i)
-            
-            i += 1
-            
+            if i - len_chars_to_mix_up >= 0:
+                
+                prev = str_to_check [ i - len_chars_to_mix_up ]
+                
+                hash_str_to_check [ ord(prev) ] -= 1
+
+            #
+            # append the beginning anagram index if found
+            #            
+            if hash_str_to_check == hash_chars_to_mix_up:
+                anagram_index_list.append( i - len_chars_to_mix_up + 1 )
+   
+        #
+        # return list of start indices for the anagram(s) found 
+        #
         return anagram_index_list
-    
-        
-    def isAnagram(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: bool
-        """
-        
-        #
-        # invalid anagram if the length of the two strings are NOT equal
-        #
-        len_str = len ( s )
-        
-        if len_str != len (t):
-            return False
-        
-        #
-        # start with a hash from a-z
-        # increment count for each instance of each letter found in s
-        # decrement count for each instance of each letter found in t
-        #
-        q = {}
-        for i in range ( ord('a'), ord('z') + 1 ):
-            q [ i ] = 0
-        
-        for ch in s:
-            q [ ord(ch) ] += 1
-    
-        for ch in t:
-            try:
-                q [ ord(ch) ] -= 1
-            except KeyError:
-                return False
-    
-        for i in range ( ord('a'), ord('z') + 1 ):
-            if q [ i ] != 0:
-                return False
-    
-        return True
+
                 
     
 def main():
     
+     
     solution = Solution()
     
-    print ("[0, 1, 2] == " + str ( solution.findAnagrams("abab", "ab") ))
+    print ("[0, 6] == " + str ( solution.findAnagrams("cbaebabacd", "abc") ))
 
 
 if __name__ == "__main__":
