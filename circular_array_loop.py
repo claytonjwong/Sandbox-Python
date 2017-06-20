@@ -2,6 +2,8 @@
 
 457. Circular Array Loop
 
+https://leetcode.com/problems/circular-array-loop/
+
 
 You are given an array of positive and negative integers. If a number n at an index is positive, then move forward n steps. Conversely, if it's negative (-n), move backward n steps. Assume the first element of the array is forward next to the last element, and the last element is backward next to the first element. Determine if there is a loop in this array. A loop starts and ends at a particular index with more than 1 element along the loop. The loop must be "forward" or "backward'.
 
@@ -12,6 +14,7 @@ Example 2: Given the array [-1, 2], there is no loop.
 Note: The given array is guaranteed to contain no element "0".
 
 Can you do it in O(n) time complexity and O(1) space complexity?
+
 
 """
 
@@ -37,7 +40,7 @@ class Solution(object):
             #
             # start at index i, and increment next index until a loop or invalid loop is found
             #
-            start_idx, next_idx = i, i
+            start_idx, next_hop = i, i
             
             #
             # only traverse forward or backwards by len(nums) "hops"
@@ -52,30 +55,31 @@ class Solution(object):
                 # current index for this iteration
                 # is the next index calculated from the previous iteration
                 #
-                curr_num = nums[next_idx]
+                curr_num = nums[next_hop]
                 
                 #
                 # calculate the next hop's index by adding the current index's
-                # value onto the current index, mod by len for wrap-arounds
+                # value onto the current index, mod by len for wrap-arounds,
+                # this is cool beacuse it works for both forward and reverse directions
                 #
-                next_idx = ( next_idx + curr_num ) % len(nums)
+                next_hop = ( next_hop + curr_num ) % len(nums)
 
                 #
                 # before we hop forward/backwards, ensure that we continue
                 # moving in the same direction as the starting direction
                 #
-                if not self.same_direction( nums[next_idx], nums[start_idx] ):
+                if not self.same_direction( nums[next_hop], nums[start_idx] ):
                     #
                     # invalid loop, set this value to 0 in order to bypass
                     # this value when checking for future loops
                     #
-                    nums[next_idx] = 0
+                    nums[next_hop] = 0
                     break
 
                 #
-                # loop found, see how many hops are included in hte loop
+                # loop found, see how many hops are included in the loop
                 #
-                if next_idx == start_idx:
+                if next_hop == start_idx:
                 
                     #
                     # we did NOT move at all ( hops==0 )
@@ -92,7 +96,7 @@ class Solution(object):
                         # invalid loop, set this value to 0 in order to bypass
                         # this value when checking for future loops
                         #
-                        nums[next_idx] = 0
+                        nums[next_hop] = 0
                         break
                     
                     else:
