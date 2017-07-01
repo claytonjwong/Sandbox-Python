@@ -99,7 +99,13 @@ class Solution(object):
             dividend -= chunk
             
             #
-            # sum the 2^curr_shift
+            # sum the 2^curr_shift:
+            #
+            # 2^curr_shift = chunk / divisor
+            #
+            # since we subtracted chunk from the dividend,
+            # keep track of how many times the divisor
+            # was used in that chunk
             #
             result += int( math.pow(2, curr_shift) )
             
@@ -120,9 +126,10 @@ def main():
     print ( "0 == " + str ( solution.divide(0, 10)))
     
 
+    import pdb
+    pdb.set_trace()
 
-
-    print ( "3 == " + str ( solution.divide(7, 2)))
+#     print ( "3 == " + str ( solution.divide(7, 2)))
     
 
     
