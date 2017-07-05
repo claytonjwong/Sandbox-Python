@@ -38,7 +38,6 @@ class Solution(object):
         if head is None:
             return None
 
-        
         if head.next is None:
             return head
     
@@ -50,9 +49,19 @@ class Solution(object):
         # p1    c1
         #       p2    c2
         #
-        p1, c1 = None, head
+        # let p1 initially point to a dummy ListNode(-1)
+        # since p1 is None initially, we would need to check if p1 is None
+        # every time in the loop, just for this one initial condition
+        #
+        p1, c1 = ListNode(-1), head
         p2, c2 = head, head.next
-               
+        
+        #
+        # we know that head and head.next exist and will be swapped
+        # so c2 will be the new head of the swapped list
+        #
+        head = c2
+        
         while True:
             #
             # make p1 point to c2
@@ -61,11 +70,7 @@ class Solution(object):
             #
             # make p2 point to c1
             #
-            if p1 is None: # special case for first iteration
-                head = c2
-            else:
-                p1.next = c2
-    
+            p1.next = c2
             p2.next = c1
             
             #
