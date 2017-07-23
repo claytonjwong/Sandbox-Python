@@ -29,14 +29,14 @@ class Solution:
         # add all into set to find the dup and later the sum of the actual series
         unique = set()
         
-        cnt = 0
+        unqiue_len = 0
         for num in nums:
             unique.add(num)
-            cnt += 1
+            unqiue_len += 1
             
             # only set duplicate once ( 0 is an invalid entry )
             # val was NOT added into the unique set, so this is the duplicate
-            if duplicate == 0 and len(unique) != cnt:
+            if duplicate == 0 and len(unique) != unqiue_len:
                 duplicate = num
 
         # missing number is sum of series minus sum of actual
