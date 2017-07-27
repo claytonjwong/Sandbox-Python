@@ -8,69 +8,16 @@ class Solution(object):
         :type strs: List[str]
         :rtype: str
         """
-
-        common_prefix = ""
-
-        #
-        # return None if strs is None
-        #
-        if ( strs == None ):
-            return None
+ 
+        # find the longest common prefix of these concantentated strings
+        tuple_of_strings = zip(*strs)
+        for i,tuple_column in enumerate(tuple_of_strings):
+            if len( set(tuple_column) ) != 1:
+                return strs[0][0:i]
         
-        #
-        # find the smallest string in the array of strings
-        #
-        smallest = None
-        
-        for string in strs:
-            if ( smallest == None ):
-                smallest = string
-            elif ( str == None ):
-                return None
-            elif ( len ( smallest ) > len ( string ) ):
-                smallest = string
-
-        #
-        # iterate through the array of strings,
-        # and add to the count if the characters
-        # are equal to the smallest length string
-        #
-        i = 0
-        
-        while ( smallest and i < len ( smallest ) ):
-
-            same = True
-        
-            #
-            # ensure all strings in the array have the same character
-            # as the smallest string
-            #
-            for string in strs:
-            
-                if ( string[i] != smallest[i] ):
-                    same = False
-                    break
-            
-            #
-            # if all strings in this position are the same, 
-            # then add this character onto the common prefix
-            #
-            # otherwise bail out
-            #
-            if ( same ):
-                common_prefix = common_prefix + smallest[i]
-            else:
-                break
-            
-            #
-            # move onto the next character position
-            #
-            i += 1
-                    
-
-        return common_prefix
-        
-
+        # if we get here, then all strings so far are equal
+        # return the smallest length string, since we ran out of string
+        return min(strs) if strs else ''
     
         
         
@@ -79,14 +26,16 @@ def main():
     
     solution = Solution()
     
+
+    
     str_arrays1 = [
         "howdy",
         "how",
-        "hi", 
+        "h", 
     ]
 
     
-    print ( "h: " + solution.longestCommonPrefix(str_arrays1))
+    print ( "h: " + str(solution.longestCommonPrefix(str_arrays1)) + "\n\n");
     
     str_arrays2 = [
         "howdy",
@@ -94,7 +43,7 @@ def main():
         "how is that done", 
     ]
     
-    print ( "how: " + solution.longestCommonPrefix(str_arrays2))
+    print ( "how: " + str(solution.longestCommonPrefix(str_arrays2)) + "\n\n");
 
 
     str_arrays3 = [
@@ -103,7 +52,10 @@ def main():
         "how is that done", 
     ]
     
-    print ( "\"\": " + solution.longestCommonPrefix(str_arrays3))    
+#     import pdb
+#     pdb.set_trace()
+    
+    print ( "'': '" + str(solution.longestCommonPrefix(str_arrays3)) + "'\n\n");
     
     
     
