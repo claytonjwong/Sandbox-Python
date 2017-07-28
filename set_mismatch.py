@@ -19,7 +19,16 @@ The given array's numbers won't have any order.
 
 
 class Solution:
+    
+    
     def findErrorNums(self, nums):
+        return [sum(nums) - sum(set(nums)), sum(range(1,len(nums)+1)) - sum(set(nums))]
+    
+    def findErrorNums2(self, nums):
+        return [sum(nums) - sum(set(nums)), len(nums)*(len(nums)+1)//2 - sum(set(nums))]
+
+    
+    def findErrorNums3(self, nums):
         """
         :type nums: List[int]
         :rtype: List[int]
@@ -51,15 +60,32 @@ class Solution:
         missing_number = sum_of_series - sum_of_actual
         
         return [ duplicate, missing_number ]
+    
         
 if __name__ == '__main__':
 
     solution = Solution()
     
-    print ("[1,2] == " + str(solution.findErrorNums([1,1])))
-    print ("[2,1] == " + str(solution.findErrorNums([2,2])))
+    nums = []
     
-    print ("[2,3] == " + str(solution.findErrorNums([1,2,2,4])))
+    n = 10000000
+    for i in range(1,n+1):
+        nums.append(i)
+    nums[1] = 3 # change 2 to 3 ( 3 is a duplicate and 2 is missing )
+        
+    from timeit import default_timer as timer
+
+    start = timer()
+    solution.findErrorNums(nums)
+    end = timer()
+    print(end - start) 
+
+    start = timer()
+    solution.findErrorNums2(nums)
+    end = timer()
+    print(end - start) 
+    
+    
     
         
         
