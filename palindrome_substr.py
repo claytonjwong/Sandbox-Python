@@ -23,7 +23,11 @@ The input string length won't exceed 1000.
 
 
 class Solution:
+    
     def countSubstrings(self, s):
+        return sum(s[i:j] == s[i:j][::-1] for j in range(len(s) + 1) for i in range(j))
+    
+    def countSubstrings2(self, s):
         """
         :type s: str
         :rtype: int
@@ -93,7 +97,9 @@ if __name__ == '__main__':
 #     import pdb
 #     pdb.set_trace()
     print ( "3 == " + str ( solution.countSubstrings("abc")))
+    print ( "3 == " + str ( solution.countSubstrings2("abc")))
     print ( "6 == " + str ( solution.countSubstrings("aaa")))
+    print ( "6 == " + str ( solution.countSubstrings2("aaa")))
     
 
     solution.is_palindome("aba")
