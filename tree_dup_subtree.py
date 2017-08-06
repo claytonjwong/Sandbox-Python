@@ -58,9 +58,6 @@ class Solution(object):
         trees = collections.defaultdict(list) # default list is []
         to_string(root)
         
-        import pdb
-        pdb.set_trace()
-        
         return [roots[0] for roots in trees.values() if len(roots)>1]
         
         
